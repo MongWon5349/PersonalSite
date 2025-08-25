@@ -11,7 +11,7 @@ const router = useRouter()
 const slug = computed(() => route.params.slug)
 
 const client = createClient({
-  space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+  space: '29l74muijlia',
   environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
   accessToken: 'kJwt3bp0v89gICy3UAf39gkQTRwCY7kpMzFZetin-Is'
 })
@@ -28,7 +28,7 @@ const fetchBlogPost = async () => {
   try {
     // 直接使用路由参数作为系统ID查询
     const entries = await client.getEntries({
-      content_type: 'Blogpost',
+      content_type: 'blogPost',
       'fields.slug': slug.value,
       include: 2
     });
