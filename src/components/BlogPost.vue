@@ -27,11 +27,10 @@ const fetchBlogPost = async () => {
   
   try {
     // 直接使用路由参数作为系统ID查询
-    const entries = await client.getEntries({
-      content_type: 'blogPost',
-      'fields.slug': slug.value,
-      include: 2
-    });
+const entries = await client.getEntries({
+  content_type: 'blogPost', // kJwt3bp0v89gICy3UAf39gkQTRwCY7kpMzFZetin-Is
+  include: 2 // 确保包含关联内容
+});
     
     if (entries.items.length > 0) {
       currentPost.value = entries.items[0];
