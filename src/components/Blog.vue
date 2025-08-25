@@ -1,336 +1,495 @@
-<template>
-  <div class="blog-container">
-    <div class="blog-header">
-      <h1 class="blog-title">我的博客</h1>
-      <p class="blog-subtitle">记录技术学习与生活感悟</p>
-    </div>
+<script setup>
+import { onMounted, onBeforeMount, ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { createClient } from 'contentful'
+
+const router = useRouter()
+const blogPosts = ref([])
+const isLoading = ref(true)
+const error = ref(null)
+
+// SEO-related metadata setup
+onBeforeMount(() => {
+  // Set page title
+  document.title = 'SEO Research Institute | Yuezhu\'s Blog'
+  
+  // Remove old meta tags (if they exist)
+  const oldMetaTags = document.querySelectorAll('meta[data-vue-meta="true"]')
+  oldMetaTags.forEach(tag => tag.remove())
+  
+  // Create and add new meta tags
+  const metaTags = [
+    // Description - Optimized to 140-160 characters
+    { name: 'description', content: 'SEO Research Institute by Yuezhu - Discover cutting-edge SEO research, technical insights, programmatic solutions, and advanced strategies for modern search optimization.' },
+    // Keywords
+    { name: 'keywords', content: 'SEO Research, Programmatic SEO, SEO Automation, Content Generation, AI SEO, Long-tail Keywords, Yuezhu' },
+    // Author
+    { name: 'author', content: 'Yuezhu' },
+    // Canonical link
+    { rel: 'canonical', href: 'https://yuezhu.chat/blog' },
+    // Open Graph tags (social media sharing optimization)
+    { property: 'og:title', content: 'SEO Research Institute | Yuezhu\'s Blog' },
+    { property: 'og:description', content: 'SEO Research Institute by Yuezhu - Discover cutting-edge SEO research, technical insights, programmatic solutions, and advanced strategies for modern search optimization.' },
+    { property: 'og:url', content: 'https://yuezhu.chat/blog' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:image', content: '' },
+    // Twitter card tags
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: 'SEO Research Institute | Yuezhu\'s Blog' },
+    { name: 'twitter:description', content: 'SEO Research Institute by Yuezhu - Discover cutting-edge SEO research, technical insights, programmatic solutions, and advanced strategies for modern search optimization.' },
+    { name: 'twitter:image', content: '' },
+  ]
+  
+  // Add meta tags to head
+  metaTags.forEach(tagInfo => {
+    const tag = document.createElement('meta')
+    tag.setAttribute('data-vue-meta', 'true') // Mark as vue-meta created tag for later cleanup
     
-    <div class="blog-content">
-      <div class="blog-intro">
-        <h2 class="section-title">关于博客</h2>
-        <p class="intro-text">
-          欢迎来到我的个人博客！在这里，我会分享技术学习心得、项目开发经验、
-          以及对前端技术发展趋势的思考。希望这些内容能够对同行开发者有所帮助。
-        </p>
+    // Set attributes
+    Object.keys(tagInfo).forEach(key => {
+      tag.setAttribute(key, tagInfo[key])
+    })
+    
+    // Add to head
+    document.head.appendChild(tag)
+  })
+  
+  // Add canonical link (if it doesn't exist)
+  let canonicalLink = document.querySelector('link[rel="canonical"]')
+  if (!canonicalLink) {
+    canonicalLink = document.createElement('link')
+    canonicalLink.setAttribute('rel', 'canonical')
+    canonicalLink.setAttribute('href', 'https://yuezhu.chat/blog')
+    canonicalLink.setAttribute('data-vue-meta', 'true')
+    document.head.appendChild(canonicalLink)
+  }
+})
+
+onMounted(async () => {
+  fetchBlogPosts()
+})
+
+const client = createClient({
+  space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+  environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
+  accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN
+})
+
+// Fetch blog posts from Contentful
+const fetchBlogPosts = async () => {
+  isLoading.value = true
+  error.value = null
+  
+  try {
+    console.log('Fetching blog posts...')
+    const entries = await client.getEntries({
+      content_type: 'blog',
+      // 移除排序，因为没有publishDate字段
+      include: 1
+    })
+    
+    console.log('Received entries:', entries)
+    console.log('Total entries:', entries.total)
+    console.log('Items:', entries.items)
+    
+    blogPosts.value = entries.items
+  } catch (err) {
+    console.error('Error fetching blog posts:', err)
+    error.value = 'Failed to load blog posts: ' + err.message
+  } finally {
+    isLoading.value = false
+  }
+}
+
+// Navigate to article detail page
+// 修改navigateToPost函数
+const navigateToPost = (post) => {
+  // 使用系统ID作为路由参数
+  const identifier = post.sys.id;
+  router.push(`/blog/${identifier}`)
+}
+
+// Computed properties for featured posts
+const featuredPosts = computed(() => {
+  return blogPosts.value.filter(post => post.fields.featured)
+})
+
+const getPostWithDefaults = (post) => {
+  if (!post) return {};
+  
+  return {
+    ...post,
+    fields: {
+      ...post.fields,
+      title: post.fields.title || '',
+      mainContent: post.fields.mainContent || {}
+      // 不要添加不存在的字段
+    }
+  };
+};
+</script>
+
+<template>
+  <div class="page-container">
+    <div class="blog-container">
+      <header class="blog-header">
+        <h1 class="blog-title">SEO Research Institute</h1>
+        <p class="blog-subtitle">Advanced research • Technical insights • Programmatic solutions</p>
+      </header>
+      
+      <!-- Loading state -->
+      <div v-if="isLoading" class="loading-state">
+        <div class="loader"></div>
+        <p>Loading...</p>
       </div>
       
-      <div class="articles-section">
-        <h2 class="section-title">最新文章</h2>
-        <div class="articles-grid">
-          <article class="article-card" v-for="article in articles" :key="article.id">
-            <div class="article-image">
-              <div class="article-category">{{ article.category }}</div>
-            </div>
-            <div class="article-content">
-              <h3 class="article-title">{{ article.title }}</h3>
-              <p class="article-excerpt">{{ article.excerpt }}</p>
-              <div class="article-meta">
-                <span class="article-date">{{ article.date }}</span>
-                <span class="article-read-time">{{ article.readTime }}</span>
-              </div>
-              <div class="article-tags">
-                <span class="tag" v-for="tag in article.tags" :key="tag">{{ tag }}</span>
-              </div>
-            </div>
-          </article>
-        </div>
+      <!-- Error state -->
+      <div v-else-if="error" class="error-state">
+        <p>{{ error }}</p>
+        <button @click="fetchBlogPosts" class="retry-button">Retry</button>
       </div>
       
-      <div class="categories-section">
-        <h2 class="section-title">文章分类</h2>
-        <div class="categories-grid">
-          <div class="category-card" v-for="category in categories" :key="category.name">
-            <div class="category-icon">{{ category.icon }}</div>
-            <h3 class="category-name">{{ category.name }}</h3>
-            <p class="category-count">{{ category.count }} 篇文章</p>
+      <template v-else>
+        <!-- All articles list -->
+        <section class="all-posts">
+          <h2 class="section-title">Research</h2>
+          <div class="blog-content">
+            <article 
+              v-for="post in blogPosts" 
+              :key="post.sys.id"
+              class="blog-post"
+              @click="navigateToPost(post)"  
+            >
+              <div class="post-header">
+                <h2 class="post-title">{{ post.fields.title }}</h2>
+                <div class="post-meta">
+                  <span v-if="getPostWithDefaults(post).fields.publishDate" class="post-date">{{ new Date(getPostWithDefaults(post).fields.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</span>
+                  <span v-if="getPostWithDefaults(post).fields.category" class="post-category">{{ getPostWithDefaults(post).fields.category }}</span>
+                  <span v-if="getPostWithDefaults(post).fields.readTime" class="read-time">{{ getPostWithDefaults(post).fields.readTime }}</span>
+                </div>
+              </div>
+              <p class="post-excerpt">
+                {{ post.fields.excerpt }}
+              </p>
+            </article>
           </div>
-        </div>
-      </div>
+        </section>
+      </template>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Blog',
-  data() {
-    return {
-      articles: [
-        {
-          id: 1,
-          title: 'Vue 3 Composition API 深度解析',
-          excerpt: '深入探讨Vue 3 Composition API的设计理念、使用方法和最佳实践，帮助开发者更好地理解和应用这一新特性。',
-          category: '前端技术',
-          date: '2024-01-15',
-          readTime: '8分钟阅读',
-          tags: ['Vue.js', 'JavaScript', '前端框架']
-        },
-        {
-          id: 2,
-          title: '现代CSS布局技术总结',
-          excerpt: '从Flexbox到Grid，从传统布局到现代布局方案，全面总结CSS布局技术的发展和应用场景。',
-          category: '前端技术',
-          date: '2024-01-08',
-          readTime: '12分钟阅读',
-          tags: ['CSS', '布局', '响应式设计']
-        },
-        {
-          id: 3,
-          title: 'JavaScript性能优化实战',
-          excerpt: '分享在实际项目中遇到的性能问题及解决方案，包括代码优化、内存管理和渲染优化等方面。',
-          category: '性能优化',
-          date: '2024-01-01',
-          readTime: '15分钟阅读',
-          tags: ['JavaScript', '性能优化', '最佳实践']
-        },
-        {
-          id: 4,
-          title: '前端工程化实践分享',
-          excerpt: '从项目搭建到部署上线，分享前端工程化的完整流程和工具选择，提升开发效率和代码质量。',
-          category: '工程化',
-          date: '2023-12-25',
-          readTime: '10分钟阅读',
-          tags: ['工程化', 'Webpack', 'Vite']
-        }
-      ],
-      categories: [
-        {
-          name: '前端技术',
-          icon: '💻',
-          count: 15
-        },
-        {
-          name: '性能优化',
-          icon: '⚡',
-          count: 8
-        },
-        {
-          name: '工程化',
-          icon: '🔧',
-          count: 6
-        },
-        {
-          name: '生活感悟',
-          icon: '📝',
-          count: 4
-        }
-      ]
-    }
-  }
-}
-</script>
-
 <style scoped>
+/* 极客风格的紧凑设计 */
+.page-container {
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  color: #2c3e50;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
 .blog-container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 24px;
 }
 
 .blog-header {
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 3rem 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 15px;
+  margin-bottom: 32px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(44, 62, 80, 0.1);
 }
 
 .blog-title {
-  font-size: 3rem;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-weight: bold;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .blog-subtitle {
-  font-size: 1.3rem;
+  font-size: 14px;
   color: #7f8c8d;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #2c3e50;
+  position: relative;
+  padding-bottom: 4px;
+  text-transform: lowercase;
+  letter-spacing: 0.5px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: #34495e;
+}
+
+/* Loading & Error states */
+.loading-state, .error-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #34495e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.retry-button {
+  background: #34495e;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+}
+
+.retry-button:hover {
+  background: #2c3e50;
+}
+
+/* Featured posts */
+.featured-posts {
+  margin-bottom: 32px;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.featured-post {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid rgba(192, 192, 192, 0.15);
+}
+
+.featured-post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.featured-content {
+  padding: 20px;
+}
+
+.featured-category {
+  display: inline-block;
+  background: #34495e;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.featured-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.featured-excerpt {
+  color: #5a6c7d;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.featured-meta {
+  display: flex;
+  justify-content: space-between;
+  color: #7f8c8d;
+  font-size: 11px;
+}
+
+/* Blog posts list */
+.all-posts {
+  margin-bottom: 32px;
 }
 
 .blog-content {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 12px;
 }
 
-.section-title {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  border-bottom: 3px solid #667eea;
-  padding-bottom: 0.5rem;
-  display: inline-block;
-}
-
-.intro-text {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #555;
-  text-align: justify;
-}
-
-.articles-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-}
-
-.article-card {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.blog-post {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid rgba(192, 192, 192, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
-.article-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+.blog-post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
-.article-image {
-  height: 120px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.post-header {
+  margin-bottom: 12px;
 }
 
-.article-category {
-  background: rgba(255, 255, 255, 0.9);
-  color: #667eea;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+/* New H3 structure styles */
+.research-focus {
+  margin-bottom: 24px;
+  padding: 16px 0;
+}
+
+.focus-title {
+  font-size: 16px;
   font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.article-content {
-  padding: 1.5rem;
-}
-
-.article-title {
-  font-size: 1.3rem;
   color: #2c3e50;
-  margin-bottom: 0.8rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.focus-item {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  border: 1px solid rgba(192, 192, 192, 0.1);
+}
+
+.focus-heading {
+  font-size: 13px;
   font-weight: 600;
+  color: #34495e;
+  margin-bottom: 4px;
+}
+
+.focus-desc {
+  font-size: 11px;
+  color: #7f8c8d;
   line-height: 1.4;
 }
 
-.article-excerpt {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-}
-
-.article-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-size: 0.85rem;
-  color: #888;
-}
-
-.article-date {
-  background: rgba(102, 126, 234, 0.1);
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  color: #667eea;
-}
-
-.article-read-time {
-  font-weight: 500;
-}
-
-.article-tags {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.tag {
-  background: #f8f9fa;
-  color: #495057;
-  padding: 0.3rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.categories-section {
-  margin-top: 2rem;
-}
-
-.categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-
-.category-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.category-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-.category-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.category-name {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.category-count {
+.section-subtitle {
+  font-size: 13px;
   color: #7f8c8d;
-  font-size: 0.9rem;
+  margin-bottom: 12px;
+  font-weight: 400;
+  text-align: center;
+  font-style: italic;
 }
 
+.methodology-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(192, 192, 192, 0.1);
+}
+
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.method-item {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  border: 1px solid rgba(192, 192, 192, 0.1);
+}
+
+.method-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.method-desc {
+  font-size: 11px;
+  color: #5a6c7d;
+  line-height: 1.4;
+}
+
+/* Update existing post title to H3 */
+.post-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .blog-container {
-    padding: 1rem;
-  }
-  
-  .blog-title {
-    font-size: 2.5rem;
-  }
-  
-  .articles-grid {
+  .focus-grid, .methodology-grid {
     grid-template-columns: 1fr;
   }
   
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .focus-title {
+    font-size: 14px;
   }
   
-  .article-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .focus-heading, .method-heading {
+    font-size: 12px;
   }
-}
-
-@media (max-width: 480px) {
-  .categories-grid {
-    grid-template-columns: 1fr;
+  
+  .focus-desc, .method-desc {
+    font-size: 10px;
   }
 }
 </style>
