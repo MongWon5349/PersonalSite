@@ -12,7 +12,7 @@ const slug = computed(() => route.params.slug)
 
 const client = createClient({
   space: '29l74muijlia',
-  environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
+  environment: 'master', // defaults to 'master' if not set
   accessToken: 'kJwt3bp0v89gICy3UAf39gkQTRwCY7kpMzFZetin-Is'
 })
 
@@ -27,10 +27,10 @@ const fetchBlogPost = async () => {
   
   try {
     // 直接使用路由参数作为系统ID查询
-const entries = await client.getEntries({
-  content_type: 'blogPost', // kJwt3bp0v89gICy3UAf39gkQTRwCY7kpMzFZetin-Is
-  include: 2 // 确保包含关联内容
-});
+    const entries = await client.getEntries({
+      'sys.id': slug.value,
+      include: 2
+    });
     
     if (entries.items.length > 0) {
       currentPost.value = entries.items[0];
@@ -76,18 +76,18 @@ const updateSEOMetadata = () => {
     // Author
     { name: 'author', content: post.author || 'Yuezhu' },
     // Canonical link
-    { rel: 'canonical', href: `https://mengyuan.click/blog/${post.slug}` },
+    { rel: 'canonical', href: `https://yuezhu.chat/blog/${post.slug}` },
     // Open Graph tags (social media sharing optimization)
     { property: 'og:title', content: post.title },
     { property: 'og:description', content: post.excerpt || post.title },
-    { property: 'og:url', content: `https://mengyuan.click/blog/${post.slug}` },
+    { property: 'og:url', content: `https://yuezhu.chat/blog/${post.slug}` },
     { property: 'og:type', content: 'article' },
-    { property: 'og:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '' },
+    { property: 'og:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '/pmy-profile.png' },
     // Twitter card tags
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: post.title },
     { name: 'twitter:description', content: post.excerpt || post.title },
-    { name: 'twitter:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '' },
+    { name: 'twitter:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '/pmy-profile.png' },
   ]
   
   // Add meta tags to head
@@ -130,7 +130,7 @@ const backToBlog = () => {
 
 // 处理混合内容的渲染器
 const renderedContent = computed(() => {
-  if (!currentPost.value || !currentPost.value.fields.mainContent) {
+  if (!currentPost.value || !currentPost.value.fields.richText) {
     return ''
   }
 
@@ -190,11 +190,11 @@ const renderedContent = computed(() => {
   }
 
   try {
-    return documentToHtmlString(currentPost.value.fields.mainContent, options)
+    return documentToHtmlString(currentPost.value.fields.richText, options)
   } catch (error) {
     console.error('渲染内容时出错:', error)
     // 如果富文本解析失败，尝试直接解析为 Markdown
-    const rawContent = JSON.stringify(currentPost.value.fields.mainContent)
+    const rawContent = JSON.stringify(currentPost.value.fields.richText)
     if (rawContent.includes('**') || rawContent.includes('|')) {
       // 提取文本内容并作为 Markdown 处理
       const extractText = (node) => {
@@ -207,7 +207,7 @@ const renderedContent = computed(() => {
         return ''
       }
       
-      const textContent = currentPost.value.fields.mainContent.content
+      const textContent = currentPost.value.fields.richText.content
         .map(extractText)
         .join('\n\n')
       
@@ -244,7 +244,7 @@ const renderedContent = computed(() => {
         <header class="post-header">
           <div class="post-meta">
             <span v-if="currentPost.fields.category" class="post-category">{{ currentPost.fields.category }}</span>
-            <span v-if="currentPost.fields.publishDate" class="post-date">{{ new Date(currentPost.fields.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
+            <span v-if="currentPost.fields.time" class="post-date">{{ new Date(currentPost.fields.time).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
             <span v-if="currentPost.fields.readTime" class="read-time">{{ currentPost.fields.readTime }} read</span>
           </div>
           <h1 class="post-title">{{ currentPost.fields.title }}</h1>
@@ -252,7 +252,7 @@ const renderedContent = computed(() => {
           <!-- Author info -->
           <div class="author-info">
             <div class="author-avatar">
-              <div class="avatar-placeholder">Y</div>
+              <img src="/pmy-profile.png" alt="Author" />
             </div>
             <div class="author-details">
               <div v-if="currentPost.fields.author" class="author-name">{{ currentPost.fields.author }}</div>
@@ -286,7 +286,7 @@ const renderedContent = computed(() => {
               <h3 class="related-title">{{ post.fields.title }}</h3>
               <div class="related-meta">
                 <span class="post-category">{{ post.fields.category }}</span>
-                <span class="post-date">{{ new Date(post.fields.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
+                <span class="post-date">{{ new Date(post.fields.time).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) }}</span>
               </div>
             </article>
           </div>

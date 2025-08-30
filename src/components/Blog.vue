@@ -32,12 +32,12 @@ onBeforeMount(() => {
     { property: 'og:description', content: 'SEO Research Institute by Yuezhu - Discover cutting-edge SEO research, technical insights, programmatic solutions, and advanced strategies for modern search optimization.' },
     { property: 'og:url', content: 'https://yuezhu.chat/blog' },
     { property: 'og:type', content: 'website' },
-    { property: 'og:image', content: '' },
+    { property: 'og:image', content: '/pmy-profile.png' },
     // Twitter card tags
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'SEO Research Institute | Yuezhu\'s Blog' },
     { name: 'twitter:description', content: 'SEO Research Institute by Yuezhu - Discover cutting-edge SEO research, technical insights, programmatic solutions, and advanced strategies for modern search optimization.' },
-    { name: 'twitter:image', content: '' },
+    { name: 'twitter:image', content: '/pmy-profile.png' },
   ]
   
   // Add meta tags to head
@@ -70,9 +70,9 @@ onMounted(async () => {
 })
 
 const client = createClient({
-  space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
-  environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master',
-  accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN
+  space: '29l74muijlia',
+  environment: 'master', // defaults to 'master' if not set
+  accessToken: 'kJwt3bp0v89gICy3UAf39gkQTRwCY7kpMzFZetin-Is'
 })
 
 // Fetch blog posts from Contentful
@@ -84,15 +84,24 @@ const fetchBlogPosts = async () => {
     console.log('Fetching blog posts...')
     const entries = await client.getEntries({
       content_type: 'blog',
-      // 移除排序，因为没有publishDate字段
-      include: 1
+      include: 2
     })
     
     console.log('Received entries:', entries)
     console.log('Total entries:', entries.total)
     console.log('Items:', entries.items)
+    console.log('Includes:', entries.includes)
     
-    blogPosts.value = entries.items
+    // 从includes.Entry中提取实际的博客文章数据
+    if (entries.includes && entries.includes.Entry) {
+      blogPosts.value = entries.includes.Entry.filter(entry => 
+        entry.sys.contentType.sys.id === 'blogPost'
+      )
+    } else {
+      blogPosts.value = []
+    }
+    
+    console.log('Processed blog posts:', blogPosts.value)
   } catch (err) {
     console.error('Error fetching blog posts:', err)
     error.value = 'Failed to load blog posts: ' + err.message
@@ -163,7 +172,7 @@ const getPostWithDefaults = (post) => {
               <div class="post-header">
                 <h2 class="post-title">{{ post.fields.title }}</h2>
                 <div class="post-meta">
-                  <span v-if="getPostWithDefaults(post).fields.publishDate" class="post-date">{{ new Date(getPostWithDefaults(post).fields.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</span>
+                  <span v-if="getPostWithDefaults(post).fields.time" class="post-date">{{ new Date(getPostWithDefaults(post).fields.time).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</span>
                   <span v-if="getPostWithDefaults(post).fields.category" class="post-category">{{ getPostWithDefaults(post).fields.category }}</span>
                   <span v-if="getPostWithDefaults(post).fields.readTime" class="read-time">{{ getPostWithDefaults(post).fields.readTime }}</span>
                 </div>
