@@ -227,6 +227,14 @@ export default {
   display: block;
   background-color: transparent;
   padding: 0;
+  transition: all 0.5s ease;
+  position: relative;
+}
+
+.avatar:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 0 8px 20px rgba(142, 45, 226, 0.2);
+  border: 3px solid rgba(142, 45, 226, 0.3);
 }
 
 .name {
@@ -287,7 +295,7 @@ export default {
 }
 
 .intro-text {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   line-height: 1.8;
   color: #333;
   text-align: justify;
@@ -327,6 +335,30 @@ export default {
   border-radius: 20px;
   font-size: 0.85rem;
   border: 1px solid #e5e5e5;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-tag:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(142, 45, 226, 0.1);
+}
+
+.skill-tag:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.skill-tag:hover:before {
+  left: 100%;
 }
 
 .experience-content {
@@ -341,6 +373,34 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   border: 1px solid #e5e5e5;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-section:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.experience-section:before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 0;
+  height: 0;
+  background: rgba(142, 45, 226, 0.05);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+
+.experience-section:hover:before {
+  transform: scale(6);
+  width: 200%;
+  height: 200%;
 }
 
 .experience-section h4 {
@@ -416,6 +476,31 @@ export default {
   border-left: 4px solid #000000;
   margin-bottom: 15px;
   border: 1px solid #e5e5e5;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.education-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.education-item:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #000000;
+  transition: width 0.3s ease;
+  z-index: 0;
+}
+
+.education-item:hover:before {
+  width: 100%;
+  opacity: 0.05;
 }
 
 .degree {
@@ -439,9 +524,22 @@ export default {
   z-index: -1;
   opacity: 0.02;
   background-image: 
-    radial-gradient(circle at 20% 80%, #000000 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, #333333 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, #8e2de2 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, #4a00e0 0%, transparent 50%),
     radial-gradient(circle at 40% 40%, #666666 0%, transparent 50%);
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media (max-width: 768px) {
