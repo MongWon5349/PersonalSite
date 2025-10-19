@@ -95,24 +95,25 @@ export default {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 3rem;
   margin: 0 auto;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: white;
 }
 
 .about-title {
   font-size: 2.5rem;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 0.5rem;
 }
 
 .about-subtitle {
   font-size: 1.2rem;
-  color: #7f8c8d;
+  color: #666666;
 }
 
 .about-content {
@@ -123,9 +124,9 @@ export default {
 
 .section-title {
   font-size: 1.8rem;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 1.5rem;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #000000;
   padding-bottom: 0.5rem;
 }
 
@@ -145,13 +146,14 @@ export default {
 .skill-category {
   background: white;
   padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
 }
 
 .category-title {
   font-size: 1.2rem;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 1rem;
 }
 
@@ -162,7 +164,7 @@ export default {
 }
 
 .skill-item {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000;
   color: white;
   padding: 0.4rem 0.8rem;
   border-radius: 15px;
@@ -182,8 +184,9 @@ export default {
   gap: 1rem;
   padding: 1rem;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
   transition: transform 0.3s ease;
 }
 
@@ -197,7 +200,7 @@ export default {
 
 .contact-text {
   font-size: 1.1rem;
-  color: #2c3e50;
+  color: #000000;
 }
 
 @media (max-width: 768px) {

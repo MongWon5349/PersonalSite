@@ -32,12 +32,12 @@ onBeforeMount(() => {
     { property: 'og:description', content: 'SEO Research Institute by Yuezhu - Discover cutting-edge SEO research, technical insights, programmatic solutions, and advanced strategies for modern search optimization.' },
     { property: 'og:url', content: 'https://yuezhu.chat/blog' },
     { property: 'og:type', content: 'website' },
-    { property: 'og:image', content: '/pmy-profile.png' },
+    { property: 'og:image', content: '/image.png' },
     // Twitter card tags
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: 'SEO Research Institute | Yuezhu\'s Blog' },
     { name: 'twitter:description', content: 'SEO Research Institute by Yuezhu - Discover cutting-edge SEO research, technical insights, programmatic solutions, and advanced strategies for modern search optimization.' },
-    { name: 'twitter:image', content: '/pmy-profile.png' },
+    { name: 'twitter:image', content: '/image.png' },
   ]
   
   // Add meta tags to head
@@ -189,12 +189,12 @@ const getPostWithDefaults = (post) => {
 </template>
 
 <style scoped>
-/* 极客风格的紧凑设计 */
+/* 黑白简约风格设计 */
 .page-container {
   min-height: calc(100vh - 60px);
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+  background: #ffffff;
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-  color: #2c3e50;
+  color: #000000;
   padding: 20px 0;
   overflow-y: auto;
 }
@@ -216,17 +216,14 @@ const getPostWithDefaults = (post) => {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000;
   letter-spacing: -0.5px;
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .blog-subtitle {
   font-size: 14px;
-  color: #7f8c8d;
+  color: #666666;
   font-weight: 400;
   letter-spacing: 0.5px;
   text-transform: lowercase;
@@ -236,7 +233,7 @@ const getPostWithDefaults = (post) => {
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 16px;
-  color: #2c3e50;
+  color: #000000;
   position: relative;
   padding-bottom: 4px;
   text-transform: lowercase;
@@ -250,14 +247,14 @@ const getPostWithDefaults = (post) => {
   left: 0;
   width: 24px;
   height: 2px;
-  background: #34495e;
+  background: #000000;
 }
 
 /* Loading & Error states */
 .loading-state, .error-state {
   text-align: center;
   padding: 40px 20px;
-  color: #7f8c8d;
+  color: #666666;
   font-size: 14px;
 }
 
@@ -265,7 +262,7 @@ const getPostWithDefaults = (post) => {
   width: 20px;
   height: 20px;
   border: 2px solid #f3f3f3;
-  border-top: 2px solid #34495e;
+  border-top: 2px solid #000000;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 0 auto 16px;
@@ -277,7 +274,7 @@ const getPostWithDefaults = (post) => {
 }
 
 .retry-button {
-  background: #34495e;
+  background: #000000;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -289,7 +286,7 @@ const getPostWithDefaults = (post) => {
 }
 
 .retry-button:hover {
-  background: #2c3e50;
+  background: #333333;
 }
 
 /* Featured posts */
@@ -304,13 +301,13 @@ const getPostWithDefaults = (post) => {
 }
 
 .featured-post {
-  background: rgba(255, 255, 255, 0.95);
+  background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
   cursor: pointer;
-  border: 1px solid rgba(192, 192, 192, 0.15);
+  border: 1px solid #e5e5e5;
 }
 
 .featured-post:hover {
@@ -324,7 +321,7 @@ const getPostWithDefaults = (post) => {
 
 .featured-category {
   display: inline-block;
-  background: #34495e;
+  background: #000000;
   color: white;
   padding: 2px 8px;
   border-radius: 4px;
@@ -338,14 +335,14 @@ const getPostWithDefaults = (post) => {
 .featured-title {
   font-size: 16px;
   font-weight: 600;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 8px;
   line-height: 1.3;
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .featured-excerpt {
-  color: #5a6c7d;
+  color: #666666;
   line-height: 1.5;
   margin-bottom: 12px;
   font-size: 13px;
@@ -354,7 +351,7 @@ const getPostWithDefaults = (post) => {
 .featured-meta {
   display: flex;
   justify-content: space-between;
-  color: #7f8c8d;
+  color: #666666;
   font-size: 11px;
 }
 
@@ -370,11 +367,10 @@ const getPostWithDefaults = (post) => {
 }
 
 .blog-post {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: #ffffff;
   border-radius: 8px;
   padding: 20px;
-  border: 1px solid rgba(192, 192, 192, 0.15);
+  border: 1px solid #e5e5e5;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
   cursor: pointer;
@@ -477,7 +473,7 @@ const getPostWithDefaults = (post) => {
 .post-title {
   font-size: 16px;
   font-weight: 600;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 8px;
   line-height: 1.3;
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;

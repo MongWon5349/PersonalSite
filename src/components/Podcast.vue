@@ -103,20 +103,21 @@ export default {
   text-align: center;
   margin-bottom: 3rem;
   padding: 3rem 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
 }
 
 .podcast-title {
   font-size: 3rem;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 1rem;
   font-weight: bold;
 }
 
 .podcast-subtitle {
   font-size: 1.3rem;
-  color: #7f8c8d;
+  color: #666666;
   font-weight: 300;
 }
 
@@ -128,9 +129,9 @@ export default {
 
 .section-title {
   font-size: 2rem;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 1.5rem;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #000000;
   padding-bottom: 0.5rem;
   display: inline-block;
 }
@@ -150,21 +151,22 @@ export default {
 .episode-card {
   display: flex;
   background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  border: 1px solid #e5e5e5;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .episode-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 .episode-image {
   width: 150px;
   height: 150px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,7 +183,7 @@ export default {
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: #667eea;
+  color: #000000;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -200,7 +202,7 @@ export default {
 
 .episode-title {
   font-size: 1.3rem;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
@@ -221,10 +223,10 @@ export default {
 }
 
 .episode-date {
-  background: rgba(102, 126, 234, 0.1);
+  background: #f0f0f0;
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
-  color: #667eea;
+  color: #000000;
 }
 
 .episode-duration {
@@ -234,8 +236,9 @@ export default {
 .subscribe-section {
   text-align: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
 }
 
 .subscribe-text {
@@ -259,15 +262,16 @@ export default {
   background: white;
   border-radius: 25px;
   text-decoration: none;
-  color: #2c3e50;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  color: #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-weight: 500;
 }
 
 .platform-link:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .platform-icon {

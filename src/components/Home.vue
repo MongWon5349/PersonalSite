@@ -5,21 +5,29 @@
     <div class="container">
       <div class="header">
         <div class="header-content">
-          <img src="/image.png" alt="头像" class="avatar">
-          <h1 class="name">张三</h1>
-          <p class="title">全栈开发工程师</p>
+          <img src="/image2.png" alt="头像" class="avatar">
+          <h1 class="name">庞梦媛</h1>
+          <p class="title">用户增长运营</p>
           <div class="contact-info">
             <div class="contact-item">
-              <span>📧</span>
-              <span>zhangsan@email.com</span>
-            </div>
-            <div class="contact-item">
               <span>📱</span>
-              <span>138-0000-0000</span>
+              <span>13701005574</span>
             </div>
             <div class="contact-item">
-              <span>🌐</span>
-              <span>github.com/zhangsan</span>
+              <span>📧</span>
+              <span>mengyuanp5349@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <span>📍</span>
+              <span>上海</span>
+            </div>
+            <div class="contact-item">
+              <span>🎂</span>
+              <span>28岁</span>
+            </div>
+            <div class="contact-item">
+              <span>💼</span>
+              <span>在职 | 期望薪资：15k-20k</span>
             </div>
           </div>
         </div>
@@ -27,33 +35,32 @@
 
       <div class="main-content">
         <div class="section">
-          <h2 class="section-title">技能专长</h2>
+          <h2 class="section-title">专业概述</h2>
+          <p class="intro-text">
+            具备4年ToC用户增长经验，擅长从0到1搭建品牌账号矩阵，成功实现用户基数连续三年翻倍增长。拥有丰富的跨平台运营经验和数据驱动的运营方法论，具备优秀的跨部门协作能力和海外市场拓展能力。
+          </p>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">核心技能</h2>
           <div class="skills-grid">
             <div class="skill-category">
-              <h4>前端技术</h4>
+              <h4>运营技能</h4>
               <div class="skill-tags">
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Vue.js</span>
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">用户增长：拉新激活-留存-付费全链路运营</span>
+                <span class="skill-tag">内容运营：小红书、Instagram、Facebook、YouTube多平台内容策划</span>
+                <span class="skill-tag">数据分析：Excel 透视函数，SQL查询优化</span>
+                <span class="skill-tag">KOL合作：300+国内外达人合作经验，ROI导向的合作管理</span>
+                <span class="skill-tag">SEO优化：使用AI 工具批量生产Google EEAT高分英文博客</span>
               </div>
             </div>
             <div class="skill-category">
-              <h4>后端技术</h4>
+              <h4>工具技能</h4>
               <div class="skill-tags">
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">MongoDB</span>
-              </div>
-            </div>
-            <div class="skill-category">
-              <h4>开发工具</h4>
-              <div class="skill-tags">
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">AWS</span>
-                <span class="skill-tag">Jenkins</span>
+                <span class="skill-tag">设计工具：Canva, Photoshop, Figma, 剪映</span>
+                <span class="skill-tag">办公软件：Excel，PowerPoint</span>
+                <span class="skill-tag">AI工具：ChatGPT 5.0、Dify工作流搭建、Cursor、Gemini（深度用户）</span>
+                <span class="skill-tag">语言能力：英语（CET-6），口语流利，可作为工作语言，熟练英文邮件写作</span>
               </div>
             </div>
           </div>
@@ -65,31 +72,81 @@
           <div class="experience-item">
             <div class="experience-header">
               <div>
-                <div class="job-title">高级前端开发工程师</div>
-                <div class="company">科技创新有限公司</div>
+                <div class="job-title">运营专家</div>
+                <div class="company">北京良孝科技有限公司（Wellcee唯心所寓）</div>
               </div>
-              <div class="duration">2022.03 - 至今</div>
+              <div class="duration">2021.02 - 至今 | 北京/上海</div>
             </div>
-            <ul class="achievements">
-              <li>负责公司核心产品的前端架构设计和开发</li>
-              <li>优化页面性能，提升用户体验30%</li>
-              <li>带领团队完成多个重要项目的交付</li>
-            </ul>
+            <div class="experience-content">
+              <div class="experience-section">
+                <h4>📈 APP用户增长策略</h4>
+                <ul class="achievements">
+                  <li>制定并执行用户增长策略，建立完整的用户转化模型</li>
+                  <li>通过社媒、KOL达人合作、付费广告、SEO优化和内容营销提升品牌知名度</li>
+                  <li><strong>核心成果</strong>：APP下载用户8000万+，用户基数连续三年翻倍增长，MAU年度同比增长60%，B+C端收入连续两年翻倍增长</li>
+                </ul>
+              </div>
+              
+              <div class="experience-section">
+                <h4>🌍 海外市场拓展</h4>
+                <ul class="achievements">
+                  <li>从0到1搭建5个Instagram矩阵账号，覆盖上海、北京、深圳、香港</li>
+                  <li>管理国内最大外国人租房Facebook小组，精准引流海外用户50w</li>
+                  <li><strong>核心成果</strong>：Instagram矩阵账号累计粉丝40万+，10个百万播放视频，转化海外用户20万+，2025年异业合作收入20万+</li>
+                </ul>
+              </div>
+              
+              <div class="experience-section">
+                <h4>🤝 KOL/KOC合作管理</h4>
+                <ul class="achievements">
+                  <li>挖掘同赛道国内外达人资源（小红书、抖音、IG），制定合作策略并把控内容质量</li>
+                  <li>负责商务谈判、brief撰写、内容审核等全流程管理</li>
+                  <li><strong>成果</strong>：合作KOL/KOC 400+，产出优质内容200+，全平台播放量突破9000万+</li>
+                </ul>
+              </div>
+              
+              <div class="experience-section">
+                <h4>🎯 小红书品牌账号运营</h4>
+                <ul class="achievements">
+                  <li>从0到1搭建【Wellcee唯心所寓】【唯心Live】两个品牌账号</li>
+                  <li>熟练运用小红书聚光、蒲公英投放工具进行精准营销</li>
+                  <li><strong>成果</strong>：累计粉丝4万+，赞藏7.4万+，爆款内容200+，成为小红书LGBTQ群体最具影响力的品牌账号</li>
+                </ul>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div class="experience-item">
-            <div class="experience-header">
-              <div>
-                <div class="job-title">前端开发工程师</div>
-                <div class="company">互联网科技公司</div>
-              </div>
-              <div class="duration">2020.06 - 2022.02</div>
+        <div class="section">
+          <h2 class="section-title">个人优势</h2>
+          
+          <div class="experience-content">
+            <div class="experience-section">
+              <h4>🤖 AI工具深度应用</h4>
+              <ul class="achievements">
+                <li>Dify工作流：搭建《新媒体文案生成工作流》并投入实际使用</li>
+                <li>独立站开发：使用Cursor、Trae等工具搭建个人独立站</li>
+                <li>SEO优化：建立成熟Prompt体系，使用AI 工具批量生产高质量英文博客</li>
+              </ul>
             </div>
-            <ul class="achievements">
-              <li>参与多个Web应用的开发和维护</li>
-              <li>实现响应式设计，支持多端适配</li>
-              <li>协助建立前端开发规范和流程</li>
-            </ul>
+            
+            <div class="experience-section">
+              <h4>📊 数据驱动运营</h4>
+              <ul class="achievements">
+                <li>建立完整的用户行为分析体系</li>
+                <li>熟练运用Excel数据透视表进行复杂数据分析</li>
+                <li>掌握SQL查询优化，提升数据处理效率</li>
+              </ul>
+            </div>
+            
+            <div class="experience-section">
+              <h4>🌍 海外增长运营</h4>
+              <ul class="achievements">
+                <li>3年海外账号运营经验，熟悉海外推广玩法</li>
+                <li>掌握Google SEO工作流，可高效完成高质量博客</li>
+                <li>熟悉海外KOL营销，有成熟的方法论</li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -97,28 +154,10 @@
           <h2 class="section-title">教育背景</h2>
           
           <div class="education-item">
-            <div class="degree">计算机科学与技术 学士学位</div>
-            <div class="school">某某大学</div>
-            <div style="color: #6c757d; margin-top: 5px;">2016.09 - 2020.06</div>
-          </div>
-        </div>
-
-        <div class="section">
-          <h2 class="section-title">项目经验</h2>
-          
-          <div class="experience-item">
-            <div class="experience-header">
-              <div>
-                <div class="job-title">企业管理系统</div>
-                <div class="company">React + Node.js</div>
-              </div>
-              <div class="duration">2023</div>
-            </div>
-            <ul class="achievements">
-              <li>构建完整的企业级管理系统</li>
-              <li>实现用户权限管理和数据可视化</li>
-              <li>支持高并发访问，性能优异</li>
-            </ul>
+            <div class="degree">新闻学学士</div>
+            <div class="school">北京印刷学院</div>
+            <div style="color: #6c757d; margin-top: 5px;">2015 - 2019</div>
+            <div style="color: #6c757d; margin-top: 5px;">相关课程：新媒体传播、数字营销、内容策划、数据分析</div>
           </div>
         </div>
       </div>
@@ -140,20 +179,21 @@ export default {
   min-height: 100vh;
   padding: 20px;
   position: relative;
+  background-color: #ffffff;
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  backdrop-filter: blur(10px);
+  border: 1px solid #e5e5e5;
 }
 
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000;
   color: white;
   padding: 40px;
   text-align: center;
@@ -167,7 +207,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>') repeat;
   opacity: 0.3;
 }
 
@@ -181,10 +221,12 @@ export default {
   height: 120px;
   border-radius: 50%;
   margin: 0 auto 20px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   object-fit: cover;
   display: block;
+  background-color: transparent;
+  padding: 0;
 }
 
 .name {
@@ -197,6 +239,7 @@ export default {
 .title {
   font-size: 1.2rem;
   opacity: 0.9;
+
   font-weight: 300;
 }
 
@@ -226,10 +269,10 @@ export default {
 .section-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid #000000;
   position: relative;
 }
 
@@ -240,7 +283,15 @@ export default {
   left: 0;
   width: 50px;
   height: 2px;
-  background: #764ba2;
+  background: #333333;
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  text-align: justify;
+  margin-bottom: 20px;
 }
 
 .skills-grid {
@@ -250,14 +301,15 @@ export default {
 }
 
 .skill-category {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: #f8f9fa;
   padding: 20px;
-  border-radius: 12px;
-  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  border-left: 4px solid #000000;
+  border: 1px solid #e5e5e5;
 }
 
 .skill-category h4 {
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 10px;
   font-weight: 600;
 }
@@ -269,21 +321,44 @@ export default {
 }
 
 .skill-tag {
-  background: rgba(102, 126, 234, 0.1);
-  color: #2c3e50;
+  background: #f0f0f0;
+  color: #000000;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
-  border: 1px solid rgba(102, 126, 234, 0.2);
+  border: 1px solid #e5e5e5;
+}
+
+.experience-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.experience-section {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5e5;
+}
+
+.experience-section h4 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #000000;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
 }
 
 .experience-item {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: #ffffff;
   padding: 25px;
-  border-radius: 12px;
+  border-radius: 8px;
   margin-bottom: 20px;
-  border-left: 4px solid #e74c3c;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #000000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5e5;
 }
 
 .experience-header {
@@ -298,18 +373,18 @@ export default {
 .job-title {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #000000;
 }
 
 .company {
-  color: #667eea;
+  color: #666666;
   font-weight: 500;
 }
 
 .duration {
-  color: #6c757d;
+  color: #666666;
   font-size: 0.9rem;
-  background: rgba(108, 117, 125, 0.1);
+  background: #f0f0f0;
   padding: 4px 12px;
   border-radius: 20px;
 }
@@ -330,26 +405,27 @@ export default {
   content: '▶';
   position: absolute;
   left: 0;
-  color: #667eea;
+  color: #000000;
   font-size: 0.8rem;
 }
 
 .education-item {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: #ffffff;
   padding: 20px;
-  border-radius: 12px;
-  border-left: 4px solid #28a745;
+  border-radius: 8px;
+  border-left: 4px solid #000000;
   margin-bottom: 15px;
+  border: 1px solid #e5e5e5;
 }
 
 .degree {
   font-weight: 600;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 5px;
 }
 
 .school {
-  color: #28a745;
+  color: #666666;
   font-weight: 500;
 }
 
@@ -361,11 +437,11 @@ export default {
   height: 100%;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.03;
+  opacity: 0.02;
   background-image: 
-    radial-gradient(circle at 20% 80%, #667eea 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, #764ba2 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, #667eea 0%, transparent 50%);
+    radial-gradient(circle at 20% 80%, #000000 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, #333333 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, #666666 0%, transparent 50%);
 }
 
 @media (max-width: 768px) {

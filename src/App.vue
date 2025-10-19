@@ -37,13 +37,15 @@ body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
   color: #333;
+  background-color: #ffffff;
 }
 
 .navbar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #000000;
   color: white;
   padding: 1rem 0;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .nav-container {
@@ -76,7 +78,8 @@ body {
 
 .nav-link:hover,
 .nav-link.router-link-active {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .main-content {

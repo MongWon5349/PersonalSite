@@ -82,12 +82,12 @@ const updateSEOMetadata = () => {
     { property: 'og:description', content: post.excerpt || post.title },
     { property: 'og:url', content: `https://yuezhu.chat/blog/${post.slug}` },
     { property: 'og:type', content: 'article' },
-    { property: 'og:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '/pmy-profile.png' },
+    { property: 'og:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '/image.png' },
     // Twitter card tags
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: post.title },
     { name: 'twitter:description', content: post.excerpt || post.title },
-    { name: 'twitter:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '/pmy-profile.png' },
+    { name: 'twitter:image', content: post.featuredImage ? post.featuredImage.fields.file.url : '/image.png' },
   ]
   
   // Add meta tags to head
@@ -252,7 +252,7 @@ const renderedContent = computed(() => {
           <!-- Author info -->
           <div class="author-info">
             <div class="author-avatar">
-              <img src="/pmy-profile.png" alt="Author" />
+              <img src="/image.png" alt="Author" />
             </div>
             <div class="author-details">
               <div v-if="currentPost.fields.author" class="author-name">{{ currentPost.fields.author }}</div>
@@ -306,9 +306,10 @@ const renderedContent = computed(() => {
 }
 
 .back-link {
-  color: #007bff;
+  color: #000000;
   cursor: pointer;
   margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .back-link:hover {
@@ -328,7 +329,7 @@ const renderedContent = computed(() => {
 }
 
 .post-category {
-  background: #007bff;
+  background: #000000;
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
@@ -435,8 +436,9 @@ const renderedContent = computed(() => {
 }
 
 .post-content :deep(a) {
-  color: #007bff;
+  color: #000000;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .post-content :deep(a:hover) {
@@ -538,7 +540,7 @@ const renderedContent = computed(() => {
 }
 
 .subscribe-button {
-  background: #007bff;
+  background: #000000;
   color: white;
   border: none;
   padding: 8px 16px;
