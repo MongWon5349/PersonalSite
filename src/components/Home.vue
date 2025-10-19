@@ -459,6 +459,8 @@ export default {
   padding-left: 20px;
   margin-bottom: 8px;
   color: #495057;
+  font-size: 0.9rem;
+  line-height: 1.7;
 }
 
 .achievements li::before {
